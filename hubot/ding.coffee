@@ -29,8 +29,8 @@ queue = new AWS.SQS({params: {QueueUrl: url}})
 
 module.exports = (robot) ->
   robot.respond /ding( .*)?/, (res) ->
-    amount = res.match[1] || " 8"
-    body = 'ding' + amount
+    sequence = res.match[1] || "1"
+    body = sequence.trim();
     queue.sendMessage {MessageBody: body}, (err, data) ->
       if !err
         res.send ":bellhop_bell:"
