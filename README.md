@@ -37,6 +37,11 @@ This was tested on the latest Raspbian based on Debian Jessie:
 
 @alexjpaz - add this section
 
+## Team Members
+
+* [Brian Masney](https://github.com/masneyb)
+* [Alex Paz](https://github.com/alexjpaz) - Slack integration
+
 ## Images
 
 ![Raspberry Pi with a bell](images/dinger.jpg)
