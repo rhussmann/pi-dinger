@@ -1,0 +1,48 @@
+#!/bin/bash
+
+# Read bell sequences from an Amazon SQS queue
+
+set -u # Warn about uninitialized variables
+
+GPIO_PIN=${1:-}
+AWS_QUEUE_URL=${2:-}
+ARG=${3:-}
+
+if [ "${GPIO_PIN}" = "" ] || [ "${AWS_QUEUE_URL}" = "" ] ; then
+        echo "usage: $0 <GPIO Pin> <AWS Queue URL> [ -p ]" >&2
+	echo "	-p: Purge contents of SQS queue on startup" 
+        exit 1
+fi
+
+if [ "${ARG}" = "-p" ] ; then
+	aws sqs purge-queue --queue-url "${AWS_QUEUE_URL}"
+fi
+
+SCR_DIR=$(dirname "$0")
+. "${SCR_DIR}"/bell-common
+
+gpio_init "${GPIO_PIN}"
+
+cleanup()
+{
+	echo "Cleaning up"
+	gpio_close "${GPIO_PIN}"
+	exit 0
+}
+
+trap "cleanup" INT
+
+while [ 1 ] ; do
+	aws sqs receive-message --queue-url "${AWS_QUEUE_URL}" \
+				--wait-time-seconds 20 \
+				--max-number-of-messages 10 \
+				--output text | while read LINE; do
+                RECEIPT=$(echo "${LINE}" | awk '{print $5}')
+                SEQ=$(echo "${LINE}" | awk '{print $2}')
+
+                echo "Received seq=${SEQ}, receipt=${RECEIPT}"
+                send_bell_sequence "${GPIO_PIN}" "${SEQ}"
+                aws sqs delete-message --queue-url "${AWS_QUEUE_URL}" --receipt-handle "${RECEIPT}" &
+        done
+done
+

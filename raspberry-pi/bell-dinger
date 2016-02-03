@@ -1,0 +1,29 @@
+#!/bin/bash
+
+# This script is used to test the bell from the command line.
+
+set -u # Warn about uninitialized variables
+
+GPIO_PIN=${1:-}
+SEQ=${2:-}
+
+if [ "${GPIO_PIN}" = "" ] || [ "${SEQ}" = "" ] ; then
+	echo "usage: $0 <gpio pin> <sequence>" >&2
+	exit 1
+fi
+
+SCR_DIR=$(dirname "$0")
+. "${SCR_DIR}"/bell-common
+
+validate_bell_sequence "${SEQ}"
+if [ "$?" != 0 ] ; then
+	echo "Invalid sequence ${SEQ}"
+	exit 1
+fi
+
+gpio_init "${GPIO_PIN}"
+
+send_bell_sequence "${GPIO_PIN}" "${SEQ}"
+
+gpio_close "${GPIO_PIN}"
+

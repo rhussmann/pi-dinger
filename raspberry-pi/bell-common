@@ -1,0 +1,56 @@
+#!/bin/bash
+
+set -u # Warn about uninitialized variables
+
+gpio_init()
+{
+	GPIO_PIN=$1
+
+	echo "${GPIO_PIN}" > /sys/class/gpio/export
+	if [ $? != 0 ] ; then
+		exit 1
+	fi
+
+	sleep 1 # Wait for the direction file to be group writable
+
+	echo "out" > /sys/class/gpio/"gpio${GPIO_PIN}"/direction
+	if [ $? != 0 ] ; then
+		exit 1
+	fi
+}
+
+gpio_close()
+{
+	GPIO_PIN=$1
+
+        echo "${GPIO_PIN}" > /sys/class/gpio/unexport
+}
+
+validate_bell_sequence()
+{
+	SEQ=$1
+
+	if [[ $SEQ =~ ^[0-1]{1,20}$ ]] ; then
+		return 0
+	fi
+	return 1
+}
+		
+send_bell_sequence()
+{
+	GPIO_PIN=$1
+	SEQ=$2
+
+	validate_bell_sequence "${SEQ}"
+	if [ "$?" != 0 ] ; then
+		echo "Warning: Bad sequence '${SEQ}'. Dinging once."
+		SEQ=1
+	fi
+
+        echo -n "${SEQ}" | while IFS= read -r -n1 char; do
+		echo "${char}" > /sys/class/gpio/"gpio${GPIO_PIN}"/value
+		sleep 0.1
+        done
+
+	echo "0" > /sys/class/gpio/"gpio${GPIO_PIN}"/value
+}
