@@ -41,6 +41,7 @@ This was tested on the latest Raspbian based on Debian Jessie:
 
 * [Brian Masney](https://github.com/masneyb)
 * [Alex Paz](https://github.com/alexjpaz) - Slack integration
+* [Bobby Martin](https://github.com/nyxcharon) - 3D printed mount coming soon
 
 ## Images
 
