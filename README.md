@@ -35,7 +35,26 @@ This was tested on the latest Raspbian based on Debian Jessie:
 
 ## Slack integration
 
-@alexjpaz - add this section
+There is a [Hubot](https://github.com/github/hubot) script provided under [hubot/ding.coffe](./hubot/ding.coffee). You can use the [hubot-slack](https://github.com/slackhq/hubot-slack) adapter to integrate with your Slack account. If you need a host you can use [Heroku](https://gist.github.com/trey/9690729).
+
+Once you have installed the [ding.coffee](./hubot/ding.coffee) script for hubot you will be able to active the bell by messaging your hubot `ding`.
+
+##### Example log
+
+```
+Alexander Paz [10:28 PM] 
+@hubot: ding
+
+hubot [10:28 PM] 
+:bellhop_bell:
+```
+
+You can also specify a parameter to pass to the ding program (e.g. a stronger ding)
+
+```
+@hubot ding
+@hubot ding {strength}
+```
 
 ## Team Members
 
