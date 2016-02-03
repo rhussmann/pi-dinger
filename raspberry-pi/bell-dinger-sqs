@@ -37,12 +37,13 @@ while [ 1 ] ; do
 				--wait-time-seconds 20 \
 				--max-number-of-messages 10 \
 				--output text | while read LINE; do
-                RECEIPT=$(echo "${LINE}" | awk '{print $6}')
-                SEQ=$(echo "${LINE}" | awk '{print $2}')
+		echo "Received line '${LINE}'"
+		RECEIPT=$(echo "${LINE}" | awk '{print $5}')
+		SEQ=$(echo "${LINE}" | awk '{print $2}')
 
-                echo "Received seq=${SEQ}, receipt=${RECEIPT}"
-                send_bell_sequence "${GPIO_PIN}" "${SEQ}"
-                aws sqs delete-message --queue-url "${AWS_QUEUE_URL}" --receipt-handle "${RECEIPT}" &
+		echo "seq=${SEQ}, receipt=${RECEIPT}"
+		send_bell_sequence "${GPIO_PIN}" "${SEQ}"
+		aws sqs delete-message --queue-url "${AWS_QUEUE_URL}" --receipt-handle "${RECEIPT}" &
         done
 done
 
