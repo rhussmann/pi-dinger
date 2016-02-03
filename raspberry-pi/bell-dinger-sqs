@@ -37,7 +37,7 @@ while [ 1 ] ; do
 				--wait-time-seconds 20 \
 				--max-number-of-messages 10 \
 				--output text | while read LINE; do
-                RECEIPT=$(echo "${LINE}" | awk '{print $5}')
+                RECEIPT=$(echo "${LINE}" | awk '{print $6}')
                 SEQ=$(echo "${LINE}" | awk '{print $2}')
 
                 echo "Received seq=${SEQ}, receipt=${RECEIPT}"
