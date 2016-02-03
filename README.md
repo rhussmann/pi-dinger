@@ -58,11 +58,11 @@ hubot [10:28 PM]
 :bellhop_bell:
 ```
 
-You can also specify a parameter to pass to the ding program (e.g. a stronger ding)
+You can also specify a parameter that will be a sequence of dings (@bmasney elaborate)
 
 ```
-@hubot ding
-@hubot ding {strength}
+@hubot ding 
+@hubot ding 1001
 ```
 
 ## Team Members
