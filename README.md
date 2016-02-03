@@ -1,6 +1,4 @@
-# raspberry-pi-bell-dinger
-
-Your office needs a bell.
+# pi-dinger
 
 This project allows ringing a bell with varying sequences from a Raspberry Pi
 using a solenoid. A [Hubot](https://github.com/github/hubot) plugin is
