@@ -41,7 +41,7 @@ You will need to provide some envrionment variables to your hubot to access your
 export HUBOT_ACCESS_KEY_ID=YOUR_ACCESS_KEY_ID
 export HUBOT_SECRET_ACCESS_KEY=YOUR_SECRET_ACCESS_KEY_ID
 export HUBOT_AWS_REGION=YOUR_REGION
-export HUBOT_AWS_SQS_URL=YOU_SQS_URL
+export HUBOT_AWS_SQS_URL=YOUR_SQS_URL
 ```
 
 Once you have installed the [ding.coffee](./hubot/ding.coffee) script for hubot you will be able to active the bell by messaging your hubot `ding`.
@@ -56,12 +56,19 @@ hubot [10:28 PM]
 :bellhop_bell:
 ```
 
-You can also specify a parameter that will be a sequence of dings (@bmasney elaborate)
+You can also specify a parameter that will be a sequence of dings.
+
 
 ```
 @hubot ding 
 @hubot ding 1001
 ```
+
+The number determines the position of the solenoid. The example shown
+will strike the bell for 1/10th of a second, wait 2/10ths of a second,
+and strike the bell again for 1/10th of a second. The code only allows
+20 numbers inside a single message.
+
 
 ## Team Members
 
