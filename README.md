@@ -3,9 +3,9 @@
 Your office needs a bell.
 
 This project allows ringing a bell with varying sequences from a Raspberry Pi
-using a solenoid. A [https://github.com/github/hubot](Hubot) plugin is
-provided so that you can ring the bell from inside [https://slack.com/](Slack).
-The Hubot plugin drops a message in [https://aws.amazon.com/sqs/](Amazon SQS)
+using a solenoid. A [Hubot](https://github.com/github/hubot) plugin is
+provided so that you can ring the bell from inside [Slack](https://slack.com/).
+The Hubot plugin drops a message in [Amazon SQS](https://aws.amazon.com/sqs/)
 so that your Raspberry Pi can live behind a NAT without any networking changes.
 
 ## Hardware requirements
