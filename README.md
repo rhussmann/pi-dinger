@@ -37,6 +37,15 @@ This was tested on the latest Raspbian based on Debian Jessie:
 
 There is a [Hubot](https://github.com/github/hubot) script provided under [hubot/ding.coffe](./hubot/ding.coffee). You can use the [hubot-slack](https://github.com/slackhq/hubot-slack) adapter to integrate with your Slack account. If you need a host you can use [Heroku](https://gist.github.com/trey/9690729).
 
+You will need to provide some envrionment variables to your hubot to access your AWS SQS:
+
+```
+export HUBOT_ACCESS_KEY_ID=YOUR_ACCESS_KEY_ID
+export HUBOT_SECRET_ACCESS_KEY=YOUR_SECRET_ACCESS_KEY_ID
+export HUBOT_AWS_REGION=YOUR_REGION
+export HUBOT_AWS_SQS_URL=YOU_SQS_URL
+```
+
 Once you have installed the [ding.coffee](./hubot/ding.coffee) script for hubot you will be able to active the bell by messaging your hubot `ding`.
 
 ##### Example log
