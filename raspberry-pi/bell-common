@@ -57,7 +57,7 @@ send_bell_sequence()
 
         echo -n "${SEQ}" | while IFS= read -r -n1 char; do
 		echo "${char}" > /sys/class/gpio/"gpio${GPIO_PIN}"/value
-		sleep 0.1
+		sleep 0.05
         done
 
 	echo "0" > /sys/class/gpio/"gpio${GPIO_PIN}"/value
