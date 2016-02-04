@@ -6,16 +6,22 @@ gpio_init()
 {
 	GPIO_PIN=$1
 
-	echo "${GPIO_PIN}" > /sys/class/gpio/export
-	if [ $? != 0 ] ; then
-		exit 1
-	fi
+	if [ ! -d /sys/class/gpio/"gpio${GPIO_PIN}" ] ; then
+		GPIO_OPENED=1
 
-	sleep 1 # Wait for the direction file to be group writable
+		echo "${GPIO_PIN}" > /sys/class/gpio/export
+		if [ $? != 0 ] ; then
+			exit 1
+		fi
 
-	echo "out" > /sys/class/gpio/"gpio${GPIO_PIN}"/direction
-	if [ $? != 0 ] ; then
-		exit 1
+		sleep 1 # Wait for the direction file to be group writable
+
+		echo "out" > /sys/class/gpio/"gpio${GPIO_PIN}"/direction
+		if [ $? != 0 ] ; then
+			exit 1
+		fi
+	else
+		GPIO_OPENED=0
 	fi
 }
 
@@ -23,7 +29,9 @@ gpio_close()
 {
 	GPIO_PIN=$1
 
-        echo "${GPIO_PIN}" > /sys/class/gpio/unexport
+	if [ "${GPIO_OPENED}" = "1" ] ; then
+	        echo "${GPIO_PIN}" > /sys/class/gpio/unexport
+	fi
 }
 
 validate_bell_sequence()
