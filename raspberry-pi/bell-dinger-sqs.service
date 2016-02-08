@@ -8,7 +8,7 @@ Environment="AWS_ACCESS_KEY_ID=REPLACE_WITH_KEY"
 Environment="AWS_SECRET_ACCESS_KEY=REPLACE_WITH_SECRET_ACCESS_KEY"
 Environment="AWS_DEFAULT_REGION=us-east-1"
 # 17 is the GPIO pin number
-ExecStart=/home/pi/slack-raspberry-pi-bell-dinger/raspberry-pi/bell-dinger-sqs 17 ENTER_YOUR_AWS_QUEUE_URL_HERE
+ExecStart=/home/pi/pi-dinger/raspberry-pi/bell-dinger-sqs 17 ENTER_YOUR_AWS_QUEUE_URL_HERE
 
 [Install]
 WantedBy=multi-user.target
