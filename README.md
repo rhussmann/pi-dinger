@@ -30,6 +30,7 @@ This was tested on the latest
   - `sudo cp raspberry-pi/bell-dinger-sqs.service /etc/systemd/system/`
   - `sudo systemctl daemon-reload`
   - `sudo systemctl start bell-dinger-sqs.service`
+  - `sudo systemctl enable bell-dinger-sqs.service`
 
 ## Slack / Hubot integration
 
