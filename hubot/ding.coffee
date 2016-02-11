@@ -28,7 +28,7 @@ AWS.config.update({
 queue = new AWS.SQS({params: {QueueUrl: url}})
 
 module.exports = (robot) ->
-  robot.respond /ding( [0-1]+)?/, (res) ->
+  robot.respond /ding( [0-1]+)?/i, (res) ->
     sequence = res.match[1] || "1"
     body = sequence.trim();
     queue.sendMessage {MessageBody: body}, (err, data) ->
