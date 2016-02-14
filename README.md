@@ -50,10 +50,10 @@ Once you have installed the [ding.coffee](./hubot/ding.coffee) script for hubot 
 ##### Example log
 
 ```
-Alexander Paz [10:28 PM] 
+Alexander Paz [10:28 PM]
 @hubot: ding
 
-hubot [10:28 PM] 
+hubot [10:28 PM]
 :bellhop_bell:
 ```
 
@@ -61,7 +61,7 @@ You can also specify a parameter that will be a sequence of dings.
 
 
 ```
-@hubot ding 
+@hubot ding
 @hubot ding 1001
 ```
 
@@ -69,6 +69,14 @@ The number determines the position of the solenoid. The example shown
 will strike the bell for 1/10th of a second, wait 2/10ths of a second,
 and strike the bell again for 1/10th of a second. The code only allows
 20 numbers inside a single message.
+
+## SQS Message Structure
+
+As mentioned above, The timing of striking the bell is coded into the queue
+message body. To manually drive the queue you would need only to send a message
+with correct body structure. For example, rather than driving the bell through
+Slack, you could achieve the same result by placing a message on the queue being
+monitored with the message body `1001`.
 
 
 ## Team Members
@@ -80,4 +88,3 @@ and strike the bell again for 1/10th of a second. The code only allows
 ## Images
 
 ![Raspberry Pi with a bell](images/dinger.jpg)
-
